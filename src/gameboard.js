@@ -10,30 +10,30 @@ export default class Gameboard {
 
     // loop for row
     for (let row = 0; row < 10; row++) {
-        this.grid[row] = []; //new empty row (array) for each field row
-        
-        //loop for columns
-        for (let col = 0; col < 10; col++) {
-          this.grid[row][col] = null; // Each cell at position [row][col] is initialized with the value null
-        }
+      /* from 0 till 9 (not more then 10) */
+      this.grid[row] = []; //new empty row (array) for each field row
+
+      //loop for columns
+      for (let col = 0; col < 10; col++) {
+        this.grid[row][col] = null; // Each cell at position [row][col] is initialized with the value null
       }
-      
+    }
   }
 
   placeShip(coords, ship) {
-      for (let i = 0; i < coords.length; i++) {
-          const [x, y] = coords[i]; //coords of every cell
-          this.grid[x][y] = ship;   //place ship on this coords
-      }
-      this.ships.push(ship);
+    for (let i = 0; i < coords.length; i++) {
+      const [row, col] = coords[i]; //coords of every cell
+      this.grid[row][col] = ship; //place ship on this coords
+    }
+    this.ships.push(ship);
   }
 
-  receiveAttack([x, y]) {
-    const target = this.grid[x][y];
+  receiveAttack([row, col]) {
+    const target = this.grid[row][col];
     if (target) {
       target.hit();
     } else {
-      this.missedAttacks.push([x, y]);
+      this.missedAttacks.push([row, col]);
     }
   }
 
